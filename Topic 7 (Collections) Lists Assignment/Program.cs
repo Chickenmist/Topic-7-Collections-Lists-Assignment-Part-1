@@ -10,7 +10,7 @@ namespace Topic_7__Collections__Lists_Assignment
 
             Random random = new Random();
 
-            int number = 0, running = 1, selection, removal;
+            int number = 0, running = 1, selection = 0, removal = 0, addNumber = 0, findNumber = 0, occurences = 0;
 
             Console.WriteLine("Here's the list of random numbers: ");
 
@@ -50,7 +50,7 @@ namespace Topic_7__Collections__Lists_Assignment
                 {
                     Console.WriteLine("Invalid Selection");
                 }
-                else if (selection == 1)
+                else if (selection == 1) //Sort List
                 {
                     numbers.Sort();
 
@@ -72,7 +72,7 @@ namespace Topic_7__Collections__Lists_Assignment
                         }
                     }
                 }
-                else if (selection == 2)
+                else if (selection == 2) //Make a New List
                 {
                     numbers.Clear();
 
@@ -96,15 +96,29 @@ namespace Topic_7__Collections__Lists_Assignment
                         }
                     }
                 }
-                else if (selection == 3)
+                else if (selection == 3) //Remove a Value From the List
                 {
-                    Console.WriteLine("What value do you want to remove?");
-                    int.TryParse(Console.ReadLine(), out removal);
+                    while (removal <= 0)
+                    {
+                        Console.WriteLine("What value do you want to remove?");
+                        int.TryParse(Console.ReadLine(), out removal);
 
-                    numbers.Remove(removal);
+                        if (removal <= 0)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Invalid");
+                            Console.WriteLine("");
+                        }
+                    }
 
+                    while (numbers.Contains(removal))
+                    {
+                        numbers.Remove(removal);
+                    }
+
+                    Console.WriteLine("");
                     Console.WriteLine("Updated List: ");
-                    
+
                     for (int i = 0; i < numbers.Count(); i++)
                     {
                         if (i == 0)
@@ -121,31 +135,150 @@ namespace Topic_7__Collections__Lists_Assignment
                         }
                     }
                 }
-                else if (selection == 4)
+                else if (selection == 4) //Add a Value to the List
                 {
-                    Console.WriteLine("What number do you want to add to the list?");
-                }
-                else if (selection == 5)
-                {
+                    while (addNumber <= 0)
+                    { 
+                        Console.WriteLine("What positive non-zero number do you want to add to the list?");
+                        int.TryParse(Console.ReadLine(), out addNumber);
 
-                }
-                else if (selection == 6)
-                {
+                        if (addNumber <= 0)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Invalid");
+                        }
+                    }
 
-                }
-                else if (selection == 7)
-                {
+                    numbers.Add(addNumber);
 
-                }
-                else if (selection == 8)
-                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Updated List: ");
 
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.Write($"[{numbers[i]}, ");
+                        }
+                        else if (i == numbers.Count() - 1)
+                        {
+                            Console.WriteLine($"{numbers[i]}]");
+                        }
+                        else
+                        {
+                            Console.Write($"{numbers[i]}, ");
+                        }
+                    }
                 }
-                else if (selection == 9)
+                else if (selection == 5) //Count the Occurences of a Number
                 {
+                    Console.WriteLine("What number do you want to find the occurences of?");
+                    int.TryParse(Console.ReadLine(), out findNumber);
 
+                    occurences = numbers.Count(i => i == findNumber);
+
+                    //foreach (int i in numbers)  This does the same thing as above, I'm just leaving it here as future reference for myself
+                    //    if (i == findNumber)
+                    //    {
+                    //        occurences++;
+                    //    }
+
+                    Console.WriteLine("");
+                    Console.WriteLine($"The number {findNumber} occurs {occurences} in the list.");
+                    Console.WriteLine("");
+
+                    Console.WriteLine("List: ");
+
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.Write($"[{numbers[i]}, ");
+                        }
+                        else if (i == numbers.Count() - 1)
+                        {
+                            Console.WriteLine($"{numbers[i]}]");
+                        }
+                        else
+                        {
+                            Console.Write($"{numbers[i]}, ");
+                        }
+                    }
                 }
-                else if (selection == 10)
+                else if (selection == 6) //Print the Largest Value
+                {
+                    Console.WriteLine($"The largest value in the list is {numbers.Max()}.");
+                    Console.WriteLine("");
+
+                    Console.WriteLine("List: ");
+
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.Write($"[{numbers[i]}, ");
+                        }
+                        else if (i == numbers.Count() - 1)
+                        {
+                            Console.WriteLine($"{numbers[i]}]");
+                        }
+                        else
+                        {
+                            Console.Write($"{numbers[i]}, ");
+                        }
+                    }
+                }
+                else if (selection == 7) //Print the Smallest Value
+                {
+                    Console.WriteLine($"The smallest value in the list is {numbers.Min()}.");
+                    Console.WriteLine("");
+
+                    Console.WriteLine("List: ");
+
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.Write($"[{numbers[i]}, ");
+                        }
+                        else if (i == numbers.Count() - 1)
+                        {
+                            Console.WriteLine($"{numbers[i]}]");
+                        }
+                        else
+                        {
+                            Console.Write($"{numbers[i]}, ");
+                        }
+                    }
+                }
+                else if (selection == 8) //Print the Sum and the Average of the Numbers in the List
+                {
+                    Console.WriteLine($"The sum of the numbers in the list is {numbers.Sum()}. The average of the numbers in the list is {numbers.Average()}.");
+                    Console.WriteLine("");
+
+                    Console.WriteLine("List: ");
+
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.Write($"[{numbers[i]}, ");
+                        }
+                        else if (i == numbers.Count() - 1)
+                        {
+                            Console.WriteLine($"{numbers[i]}]");
+                        }
+                        else
+                        {
+                            Console.Write($"{numbers[i]}, ");
+                        }
+                    }
+                }
+                else if (selection == 9) //Determine the Most Frequently Occuring Value
+                {
+                    
+                }
+                else if (selection == 10) //Quit
                 {
                     running = 0;
                 }
