@@ -276,7 +276,24 @@ namespace Topic_7__Collections__Lists_Assignment
                 }
                 else if (selection == 9) //Determine the Most Frequently Occuring Value
                 {
-                    
+                    List <int> amountOfNumber = new List<int>();
+
+                    for (int i = 0; i < numbers.Max();i++)
+                    {
+                        amountOfNumber.Add(0);
+                    }
+
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        
+                    }
+
+                    for (int i = 0;i < amountOfNumber.Count(); i++)
+                    {
+                        Console.WriteLine(amountOfNumber[i]);
+                    }
+
+                    Console.WriteLine($"The most frequently occuring number in the list is {amountOfNumber}");
                 }
                 else if (selection == 10) //Quit
                 {
