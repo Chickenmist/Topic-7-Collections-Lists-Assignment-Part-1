@@ -41,7 +41,7 @@ namespace Topic_7__Collections__Lists_Assignment
                 Console.WriteLine("3 - Remove a Value From the List                     4 - Add a Value to the List");
                 Console.WriteLine("5 - Count the Occurences of a Number                 6 - Print the Largest Value");
                 Console.WriteLine("7 - Print the Smallest Value                         8 - Print the Sum and the Average of the Numbers in the List");
-                Console.WriteLine("9 - Determine the Most Frequently Occuring Value    10 - Quit");
+                Console.WriteLine("9 - Determine one of the Mode Values                10 - Quit");
                 Console.Write("Selection: ");
                 int.TryParse(Console.ReadLine(), out selection);
                 Console.WriteLine("");
@@ -98,6 +98,8 @@ namespace Topic_7__Collections__Lists_Assignment
                 }
                 else if (selection == 3) //Remove a Value From the List
                 {
+                    removal = 0;
+
                     while (removal <= 0)
                     {
                         Console.WriteLine("What value do you want to remove?");
@@ -137,6 +139,8 @@ namespace Topic_7__Collections__Lists_Assignment
                 }
                 else if (selection == 4) //Add a Value to the List
                 {
+                    addNumber = 0;
+
                     while (addNumber <= 0)
                     { 
                         Console.WriteLine("What positive non-zero number do you want to add to the list?");
@@ -184,7 +188,7 @@ namespace Topic_7__Collections__Lists_Assignment
                     //    }
 
                     Console.WriteLine("");
-                    Console.WriteLine($"The number {findNumber} occurs {occurences} in the list.");
+                    Console.WriteLine($"The number {findNumber} occurs {occurences} times in the list.");
                     Console.WriteLine("");
 
                     Console.WriteLine("List: ");
@@ -253,7 +257,7 @@ namespace Topic_7__Collections__Lists_Assignment
                 }
                 else if (selection == 8) //Print the Sum and the Average of the Numbers in the List
                 {
-                    Console.WriteLine($"The sum of the numbers in the list is {numbers.Sum()}. The average of the numbers in the list is {numbers.Average()}.");
+                    Console.WriteLine($"The sum of the numbers in the list is {numbers.Sum()}. The average of the numbers in the list is {Math.Round(numbers.Average())}.");
                     Console.WriteLine("");
 
                     Console.WriteLine("List: ");
@@ -274,22 +278,80 @@ namespace Topic_7__Collections__Lists_Assignment
                         }
                     }
                 }
-                else if (selection == 9) //Determine the Most Frequently Occuring Value
+                else if (selection == 9) //Determine one of the Mode Values
                 {
-                    int counterOne, counterTwo;
+                    int counterOne = 0, counterTwo = 0, valueOne = 0, valueTwo = 0;
 
                     List<int> duplicateList = new List<int>();
 
                     duplicateList = numbers;
                     duplicateList.Sort();
 
-
                     for (int i = 0; i < duplicateList.Count(); i++)
                     {
+                        if (valueOne == 0)
+                        {
+                            valueOne = duplicateList[i];
+                            counterOne++;
+                        }
+                        else if (duplicateList[i] == valueOne)
+                        {
+                            counterOne++;
+                        }
+                        else if (duplicateList[i] == valueTwo)
+                        {
+                            counterTwo++;
+                        }
+                        else if (duplicateList[i] != valueOne & duplicateList[i] != valueTwo)
+                        {
+                            if (counterTwo > counterOne)
+                            {
+                                valueOne = valueTwo;
+                                counterOne = counterTwo;
+                            }
+                            else if (counterTwo == 0)
+                            {
+                                valueTwo = duplicateList[i];
+                                counterTwo++;
+                            }
+                            else
+                            {
+                                valueTwo = duplicateList[i];
+                                counterTwo = 1;
+                            }
+                        }
+
+                        if (i == duplicateList.Count() - 1)
+                        {
+                            if (counterTwo > counterOne)
+                            {
+                                valueOne = valueTwo;
+                                counterOne = counterTwo;
+                            }
+                        }
                         
                     }
 
-                    Console.WriteLine($"The most frequently occuring number in the list is ");
+                    Console.WriteLine($"One of the list's mode values is {valueOne}.");
+                    Console.WriteLine("");
+
+                    Console.WriteLine("List: ");
+
+                    for (int i = 0; i < numbers.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            Console.Write($"[{numbers[i]}, ");
+                        }
+                        else if (i == numbers.Count() - 1)
+                        {
+                            Console.WriteLine($"{numbers[i]}]");
+                        }
+                        else
+                        {
+                            Console.Write($"{numbers[i]}, ");
+                        }
+                    }
                 }
                 else if (selection == 10) //Quit
                 {
